@@ -4,17 +4,10 @@ import { connect, Provider } from 'react-redux';
 import store, { loadUsers } from './store';
 import { HashRouter, Route, Link } from 'react-router-dom';
 import axios from 'axios';
-const Nav = ({location: {pathname}})=> {
-    //gets passed history obj
+import Users from './Users';
+import Nav from './Nav'; //nav is inside of a route, component is connected gets information from route as props gets information based on being a connected component
 
-    return (
-        <nav>
-            <Link to='/' className={ pathname === '/' ? 'selected': ''}>Home</Link>
-            <Link to='/users' className={ pathname === '/users' ? 'selected': ''}>Users</Link>
-        </nav>
-    );
-};
-
+const Home = ()=> <hr />
 class _App extends Component{
     componentDidMount(){
         this.props.bootstrap();
@@ -27,17 +20,8 @@ class _App extends Component{
                 <div>
                     <h1>Acme Users</h1>
                     <Route component={ Nav } />
-                    <ul>
-                        {
-                            this.props.users.map( user => {
-                                return (
-                                    <li key={ user.id }>
-                                        { user.name }
-                                    </li>
-                                );
-                            })
-                        }
-                    </ul>
+                    <Route component={ Home } />
+                    <Route component={ Users } path ='/users'/>
                 </div>
             </HashRouter>
 
@@ -62,3 +46,7 @@ render(<Provider store={ store }><App /></Provider>, document.querySelector('#ro
     //hash set up correctly if you see pound sign in url
     //Link allows you to create a link that goes to a particular route
     //click users - can get path name for users (console log)
+    //can add path to route - only want this to show up for users won't see users on home but when click on users can see users
+    //when click home see home component but when we click users we see home as well 
+    //fuzzy - /users has slash in it --> home also has slash 
+    
