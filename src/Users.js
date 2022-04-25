@@ -1,5 +1,7 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 const Users = ({ users })=> {
     return(
     <ul>
@@ -7,7 +9,10 @@ const Users = ({ users })=> {
             users.map( user => {
                 return (
                     <li key={ user.id }>
-                        { user.name }
+                        <Link to={`/users/${ user.id }`}>
+                            { user.name }
+                        </Link>
+                        
                     </li>
                 );
             })
@@ -18,3 +23,6 @@ const Users = ({ users })=> {
 
 export default connect(state=>state)(Users);
 //interested in users when i connect I end up getting state should have my users
+
+//NOTE:
+    //

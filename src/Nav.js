@@ -12,3 +12,5 @@ const Nav = ({ users, location: { pathname } })=> {
 
 export default connect(state=>state)(Nav);
 //interested in users when i connect I end up getting state should have my users
+
+//have another component -detailed componenet set up each of our users as link

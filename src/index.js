@@ -6,7 +6,7 @@ import { HashRouter, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import Users from './Users';
 import Nav from './Nav'; //nav is inside of a route, component is connected gets information from route as props gets information based on being a connected component
-
+import User from './User';
 const Home = ()=> <hr />
 class _App extends Component{
     componentDidMount(){
@@ -20,8 +20,9 @@ class _App extends Component{
                 <div>
                     <h1>Acme Users</h1>
                     <Route component={ Nav } />
-                    <Route component={ Home } />
-                    <Route component={ Users } path ='/users'/>
+                    <Route component={ Home } path='/' exact />
+                    <Route component={ Users } path ='/users' exact/>
+                    <Route component={ User } path ='/users/:id'/>
                 </div>
             </HashRouter>
 
@@ -49,4 +50,7 @@ render(<Provider store={ store }><App /></Provider>, document.querySelector('#ro
     //can add path to route - only want this to show up for users won't see users on home but when click on users can see users
     //when click home see home component but when we click users we see home as well 
     //fuzzy - /users has slash in it --> home also has slash 
-    
+    //<Route component={ User } path ='/users/:id'/> --> component for single user path needs info about what user this is
+    //
+    //^ put place holder 'users/:id' --> react-router-dom will parse this and find out what the id is
+    //need to put exact for routes that require exact path
