@@ -13,11 +13,14 @@ const User = ({user})=> {
     )
 }
 //can destructure 
-export default connect ((state, {match: {params: {id}}})=> {
-    console.log(id);
-    const user = state.users.find(user => user.id === otherProps.match.params.id*1) || {};
-    return {user};
-})(User);
+export default connect (
+    (state, otherProps) => {
+        const user = state.users.find(user => user.id === otherProps.match.params.id*1 || {});
+        return {
+            user
+        };
+    }
+)(User);
 //NOTE:
     //i am passed the users - match has params params has an id 
     //^this allows you to 
