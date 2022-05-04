@@ -15,7 +15,8 @@ const User = ({user})=> {
 //can destructure 
 export default connect (
     (state, otherProps) => {
-        const user = state.users.find(user => user.id === otherProps.match.params.id*1 || {});
+        const user = state.users.find(user => user.id  === otherProps.match.params.id*1) || {};
+        console.log(user.id);
         return {
             user
         };
