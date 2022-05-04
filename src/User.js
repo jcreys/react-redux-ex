@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { destroyUser } from './store'
 
-const User = ({user})=> {
+const User = ({user, destroy})=> {
     if (!user.id){
         return null;
     }
@@ -9,6 +10,7 @@ const User = ({user})=> {
         
         <div>
             User details for {user.name}
+            <button onClick={()=>destroy(user)}>Delete User</button>
         </div>
     )
 }
@@ -20,6 +22,11 @@ export default connect (
         return {
             user
         };
+    },
+    (dispatch, {history})=>{
+        return {
+            destroy: (user) => dispatch(destroyUser(user, history))
+        }
     }
 )(User);
 //NOTE:

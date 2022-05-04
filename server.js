@@ -24,7 +24,17 @@ app.post('/api/users', async(req, res, next)=> {
     next(ex);
   }
 });
+app.delete('/api/users/:id', async(req,res,next)=>{
+  try{
+    const user = await User.findByPk(req.params.id)
+    await user.destroy()
+    res.sendStatus(204);
+  }
+  catch(ex) {
+    next(ex)
+  }
 
+})
 const init = async()=> {
   try {
     await syncAndSeed();
